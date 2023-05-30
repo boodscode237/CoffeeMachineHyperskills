@@ -1,0 +1,396 @@
+type: edu
+files:
+- name: machine/coffee_machine.py
+  visible: true
+  text: |+
+    # Write your code here
+    # print("Starting to make a coffee")
+    # print("Grinding coffee beans")
+    # print("Boiling water")
+    # print("Mixing boiled water with crushed coffee beans")
+    # print("Pouring coffee into the cup")
+    # print("Pouring some milk into the cup")
+    # print("Coffee is ready!")
+    # print("Write how many cups of coffee you will need:")
+    # num_of_cups = int(input())
+    # water_ = num_of_cups * 200
+    # milk_ = num_of_cups * 50
+    # beans_ = num_of_cups * 15
+    # print("For " + str(num_of_cups) + " cups of coffee you will need:")
+    # print(str(water_) + " ml of water")
+    # print(str(milk_) + " ml of milk")
+    # print(str(beans_) + " g of coffee beans")
+    # print("Write how many ml of water the coffee machine has:")
+    # water = int(input())
+    # print("Write how many ml of milk the coffee machine has:")
+    # milk = int(input())
+    # print("Write how many grams of coffee beans the coffee machine has")
+    # beans = int(input())
+    # print("Write how many cups of coffee you will need:")
+    # start_milk = 50
+    # start_water = 200
+    # start_coffee_beans = 15
+    #
+    #
+    # print("Write how many ml of water the coffee machine has:")
+    # available_water = int(input())
+    # print("Write how many ml of milk the coffee machine has:")
+    # available_milk = int(input())
+    # print("Write how many grams of coffee beans the coffee machine has:")
+    # available_coffee_beans = int(input())
+    # print("Write how many cups of coffee you will need:")
+    # cups = int(input())
+    #
+    # a = available_water // start_water
+    # b = available_milk // start_milk
+    # c = available_coffee_beans // start_coffee_beans
+    #
+    # projected_cups = [a, b, c]
+    # n = min(projected_cups) - cups
+    #
+    # if min(projected_cups) == cups:
+    #     print("Yes, I can make that amount of coffee")
+    # elif min(projected_cups) > cups:
+    #     print(f"Yes, I can make that amount of coffee (and even {n} more than that)")
+    # elif min(projected_cups) < cups:
+    #     print(f"No, I can make only {min(projected_cups)} cups of coffee")
+    water = 400
+    milk = 540
+    beans = 120
+    cups = 9
+    money = 550
+
+    print(f"""The coffee machine has: \n{water} of water \n{milk} of milk \n{beans} of coffee beans \n{cups} of disposable cups \n{money} of money""")
+
+
+    def buy():
+        global water, milk, beans, cups, money
+        coffee_type = int(input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino: "))
+        if coffee_type == 1:
+            water = water - 250
+            beans = beans - 16
+            cups = cups - 1
+            money = money + 4
+            print(f"""The coffee machine has: \n{water} of water \n{milk} of milk \n{beans} of coffee beans \n{cups} of disposable cups \n{money} of money""")
+
+        elif coffee_type == 2:
+            water = water - 350
+            beans = beans - 20
+            milk = milk - 75
+            cups = cups - 1
+            money = money + 7
+            print(f"""The coffee machine has: \n{water} of water \n{milk} of milk \n{beans} of coffee beans \n{cups} of disposable cups \n{money} of money""")
+
+        elif coffee_type == 3:
+            water = water - 200
+            beans = beans - 12
+            milk = milk - 100
+            cups = cups - 1
+            money = money + 6
+            print(f"""The coffee machine has: \n{water} of water \n{milk} of milk \n{beans} of coffee beans \n{cups} of disposable cups \n{money} of money""")
+
+
+    def fill():
+        global water, milk, beans, cups, money
+        water_refill = int(input("Write how many ml of water do you want to add: "))
+        milk_refill = int(input("Write how many ml of milk do you want to add: "))
+        beans_refill = int(input("Write how many grams of beans do you want to add: "))
+        cups_refill = int(input("Write how many disposable cups do you want to add: "))
+        if water_refill > 0:
+            water = water + water_refill
+        if milk_refill > 0:
+            milk = milk + milk_refill
+        if beans_refill > 0:
+            beans = beans + beans_refill
+        if cups_refill > 0:
+            cups = cups + cups_refill
+        print(f"""The coffee machine has: \n{water} of water \n{milk} of milk \n{beans} of coffee beans \n{cups} of disposable cups \n{money} of money""")
+
+
+    def take():
+        global water, milk, beans, cups, money
+        money_taken = money
+        print(f"I gave you ${money_taken}")
+        money = 0
+        print(f"""The coffee machine has: \n{water} of water \n{milk} of milk \n{beans} of coffee beans \n{cups} of disposable cups \n{money} of money""")
+
+
+    def action():
+        action = input("Write action (buy, fill, take): ")
+        if action == "buy":
+            buy()
+        elif action == "fill":
+            fill()
+        elif action == "take":
+            take()
+        else:
+            print("Error")
+
+    action()
+
+
+
+
+
+  learner_created: false
+- name: test/__init__.py
+  visible: false
+  learner_created: false
+- name: test/tests.py
+  visible: false
+  text: |
+    from hstest.stage_test import *
+    from hstest.test_case import TestCase
+
+    CheckResult.correct = lambda: CheckResult(True, '')
+    CheckResult.wrong = lambda feedback: CheckResult(False, feedback)
+
+    test1_input = '''remaining
+    buy
+    2
+    buy
+    2
+    fill
+    1000
+    0
+    0
+    0
+    buy
+    2
+    take
+    remaining
+    exit
+    '''
+
+    test2_input = '''remaining
+    fill
+    3000
+    3000
+    3000
+    3000
+    remaining
+    exit
+    '''
+
+    test3_input = '''remaining
+    buy
+    1
+    remaining
+    exit
+    '''
+
+    test4_input = '''remaining
+    buy
+    2
+    remaining
+    exit
+    '''
+
+    test5_input = '''remaining
+    buy
+    3
+    remaining
+    exit
+    '''
+
+    test6_input = '''remaining
+    take
+    remaining
+    exit
+    '''
+
+    test7_input = '''remaining
+    buy
+    back
+    remaining
+    exit
+    '''
+
+
+    class CoffeeMachineTest(StageTest):
+        def generate(self) -> List[TestCase]:
+            return TestCase.from_stepik(
+                [
+                    (
+                        test1_input,
+                        (
+                            700 - 400,
+                            390 - 540,
+                            80 - 120,
+                            7 - 9,
+                            0 - 550,
+                            "This test is exactly like in the example "
+                            "- try to run it by yourself"
+                        )
+                     ),
+
+                    (
+                        test2_input,
+                        (
+                            3000,
+                            3000,
+                            3000,
+                            3000,
+                            0,
+                            "This test checks \"fill\" action"
+                        )
+                    ),
+
+                    (
+                        test3_input,
+                        (
+                            -250,
+                            0,
+                            -16,
+                            -1,
+                            4,
+                            "This test checks \"buy\" " +
+                            "action with the first variant of coffee"
+                        )
+                    ),
+
+                    (
+                        test4_input,
+                        (
+                            -350,
+                            -75,
+                            -20,
+                            -1,
+                            7,
+                            "This test checks \"buy\" " +
+                            "action with the second variant of coffee"
+                        )
+                    ),
+
+                    (
+                        test5_input,
+                        (
+                            -200,
+                            -100,
+                            -12,
+                            -1,
+                            6,
+                            "This test checks \"buy\" " +
+                            "action with the third variant of coffee"
+                        )
+                    ),
+                    (
+                        test6_input,
+                        (
+                            0,
+                            0,
+                            0,
+                            0,
+                            -550,
+                            "This test checks \"take\" action"
+                        )
+                    ),
+
+                    (
+                        test7_input,
+                        (
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            "This test checks \"back\" " +
+                            "action right after \"buy\" action"
+                        )
+                    ),
+                ]
+            )
+
+        def check(self, reply: str, clue: Any) -> CheckResult:
+            if len(reply.splitlines()) <= 1:
+                return CheckResult.wrong('Too few lines in output')
+
+            water_, milk_, beans_, cups_, money_, feedback = clue
+
+            milk = []
+            water = []
+            beans = []
+            cups = []
+            money = []
+
+            for line in reply.splitlines():
+                line = line.replace('$', '').strip()
+                if len(line.split()) == 0:
+                    continue
+                first_word = line.split()[0]
+                if not first_word.isdigit():
+                    continue
+                amount = int(first_word)
+                if 'milk' in line:
+                    milk += amount,
+                elif 'water' in line:
+                    water += amount,
+                elif 'beans' in line:
+                    beans += amount,
+                elif 'cups' in line:
+                    cups += amount,
+                elif 'money' in line or 'cash' in line:
+                    money += amount,
+
+            if len(milk) != 2:
+                return CheckResult.wrong(
+                    "There should be two lines with \"milk\", " +
+                    f"found: {len(milk)}"
+                )
+
+            if len(water) != 2:
+                return CheckResult.wrong(
+                    "There should be two lines with \"water\", " +
+                    f"found: {len(water)}"
+                )
+
+            if len(beans) != 2:
+                return CheckResult.wrong(
+                    "There should be two lines with \"beans\", " +
+                    f"found: {len(beans)}"
+                )
+
+            if len(cups) != 2:
+                return CheckResult.wrong(
+                    "There should be two lines with \"cups\", " +
+                    f"found: {len(cups)}"
+                )
+
+            if len(money) != 2:
+                return CheckResult.wrong(
+                    "There should be two lines with \"money\", " +
+                    f"found: {len(money)}"
+                )
+
+            milk = milk[0], milk[-1]
+            water = water[0], water[-1]
+            beans = beans[0], beans[-1]
+            cups = cups[0], cups[-1]
+            money = money[0], money[-1]
+
+            diff = lambda item: item[1] - item[0]
+
+            is_correct = (
+                diff(water) == water_ and
+                diff(milk) == milk_ and
+                diff(beans) == beans_ and
+                diff(cups) == cups_ and
+                diff(money) == money_
+            )
+            return CheckResult(is_correct, feedback)
+
+
+    if __name__ == '__main__':
+        CoffeeMachineTest('machine.coffee_machine').run_tests()
+  learner_created: false
+- name: tests.py
+  visible: false
+  text: |
+    from test.tests import CoffeeMachineTest
+
+    if __name__ == '__main__':
+        CoffeeMachineTest('machine.coffee_machine').run_tests()
+  learner_created: false
+feedback_link: https://hyperskill.org/projects/68/stages/370/implement#comment
+status: Solved
+record: 5
